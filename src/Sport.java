@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Sport {
     private String name;
     private int teamSize;
@@ -11,19 +13,25 @@ public class Sport {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getTeamSize() {
         return teamSize;
     }
 
-    public void setTeamSize(int teamSize) {
-        this.teamSize = teamSize;
+    @Override
+    public String toString() {
+        return name + " (team size: " + teamSize + ")";
     }
 
-    public void displayInfo() {
-        System.out.println("Sport: " + name + ", Team size: " + teamSize);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sport)) return false;
+        Sport sport = (Sport) o;
+        return name.equals(sport.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

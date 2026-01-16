@@ -1,28 +1,11 @@
-public class Athlete {
-    private String fullName;
-    private int age;
+import java.util.Objects;
+
+public class Athlete extends Person {
     private Sport sport;
 
     public Athlete(String fullName, int age, Sport sport) {
-        this.fullName = fullName;
-        this.age = age;
+        super(fullName, age);
         this.sport = sport;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public Sport getSport() {
@@ -33,8 +16,27 @@ public class Athlete {
         this.sport = sport;
     }
 
-    public void displayInfo() {
-        System.out.println("Athlete: " + fullName + ", Age: " + age +
-                ", Sport: " + sport.getName());
+    @Override
+    public String getRole() {
+        return "Athlete";
+    }
+
+    @Override
+    public String toString() {
+        return fullName + ", age " + age + ", sport: " + sport.getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Athlete)) return false;
+        Athlete athlete = (Athlete) o;
+        return age == athlete.age &&
+                fullName.equals(athlete.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, age);
     }
 }
